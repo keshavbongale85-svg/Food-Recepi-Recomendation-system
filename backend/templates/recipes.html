@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Recipes - RecipeHub</title>
+    <!-- <link rel="stylesheet" href="../../frontend/css/style.css"> -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-utensils"></i>
+                <span>RecipeHub</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/search" class="nav-link">Search Recipes</a></li>
+                <li><a href="/recipes" class="nav-link active">All Recipes</a></li>
+            </ul>
+            <div class="nav-auth" id="navAuth">
+                <a href="/login" class="btn btn-outline">Login</a>
+                <a href="/register" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Recipes Section -->
+    <section class="recipes-section">
+        <div class="container">
+            <div class="recipes-header">
+                <h1>All Recipes</h1>
+                <p>Browse our collection of delicious recipes</p>
+            </div>
+            
+            <!-- Filter Options -->
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label>Category:</label>
+                    <select id="categoryFilter" onchange="filterRecipes()">
+                        <option value="">All</option>
+                        <option value="veg">Vegetarian</option>
+                        <option value="non-veg">Non-Veg</option>
+                        <option value="vegan">Vegan</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Cuisine:</label>
+                    <select id="cuisineFilter" onchange="filterRecipes()">
+                        <option value="">All</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="American">American</option>
+                        <option value="Greek">Greek</option>
+                        <option value="Asian">Asian</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Loading State -->
+            <div id="loadingState" class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading recipes...</p>
+            </div>
+            
+            <!-- Recipes Grid -->
+<div class="recipes-grid" id="recipesGrid">
+            <div class="recipes-grid" id="recipesGrid">
+
+    <div class="recipe-card">
+        <h3>Curd Rice</h3>
+        <p><strong>Cuisine:</strong> Asian</p>
+        <p><strong>Ingredients:</strong> Rice, Yogurt, Mustard seeds, Curry leaves, Green chili</p>
+    </div>
+        <div class="recipe-card">
+        <h3>Spaghetti Carbonara</h3>
+        <p><strong>Cuisine:</strong> Italian</p>
+        <p><strong>Ingredients:</strong> Spaghetti, Eggs, Parmesan, Pancetta, Black Pepper</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Butter Chicken</h3>
+        <p><strong>Cuisine:</strong> Indian</p>
+        <p><strong>Ingredients:</strong> Chicken, Tomato puree, Butter, Cream, Garam Masala</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Sushi Rolls</h3>
+        <p><strong>Cuisine:</strong> Japanese</p>
+        <p><strong>Ingredients:</strong> Sushi rice, Nori, Salmon/Tuna, Avocado, Cucumber</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Pad Thai</h3>
+        <p><strong>Cuisine:</strong> Thai</p>
+        <p><strong>Ingredients:</strong> Rice noodles, Shrimp/Chicken, Peanuts, Egg, Bean sprouts</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Shawarma</h3>
+        <p><strong>Cuisine:</strong> Middle Eastern</p>
+        <p><strong>Ingredients:</strong> Pita bread, Grilled chicken/beef, Garlic sauce, Lettuce, Tomato</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Pancakes</h3>
+        <p><strong>Cuisine:</strong> American</p>
+        <p><strong>Ingredients:</strong> Flour, Milk, Eggs, Sugar, Baking powder</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Caesar Salad</h3>
+        <p><strong>Cuisine:</strong> Italian-American</p>
+        <p><strong>Ingredients:</strong> Romaine lettuce, Croutons, Parmesan, Caesar dressing</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Margherita Pizza</h3>
+        <p><strong>Cuisine:</strong> Italian</p>
+        <p><strong>Ingredients:</strong> Pizza dough, Tomato sauce, Mozzarella, Basil</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Fried Rice</h3>
+        <p><strong>Cuisine:</strong> Chinese</p>
+        <p><strong>Ingredients:</strong> Rice, Carrots, Peas, Soy sauce, Egg</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Tacos</h3>
+        <p><strong>Cuisine:</strong> Mexican</p>
+        <p><strong>Ingredients:</strong> Tortilla, Chicken/Beef, Lettuce, Cheese, Salsa</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Greek Salad</h3>
+        <p><strong>Cuisine:</strong> Greek</p>
+        <p><strong>Ingredients:</strong> Cucumber, Tomato, Feta cheese, Olives, Olive oil</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Burger</h3>
+        <p><strong>Cuisine:</strong> American</p>
+        <p><strong>Ingredients:</strong> Bun, Beef patty, Lettuce, Tomato, Cheese</p>
+    </div>
+
+    <div class="recipe-card">
+         <h3>Spaghetti Carbonara</h3>
+        <p><strong>Cuisine:</strong> Italian</p>
+        <p><strong>Ingredients:</strong> Spaghetti, Eggs, Parmesan, Pancetta, Black pepper</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Chicken Alfredo</h3>
+        <p><strong>Cuisine:</strong> Italian</p>
+        <p><strong>Ingredients:</strong> Fettuccine, Chicken, Cream, Garlic, Parmesan</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Sweet and Sour Chicken</h3>
+        <p><strong>Cuisine:</strong> Chinese</p>
+        <p><strong>Ingredients:</strong> Chicken, Bell peppers, Pineapple, Vinegar, Sugar</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Kung Pao Chicken</h3>
+        <p><strong>Cuisine:</strong> Chinese</p>
+        <p><strong>Ingredients:</strong> Chicken, Peanuts, Chili peppers, Soy sauce, Garlic</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Quesadilla</h3>
+        <p><strong>Cuisine:</strong> Mexican</p>
+        <p><strong>Ingredients:</strong> Tortilla, Cheese, Chicken, Bell peppers, Onion</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Guacamole</h3>
+        <p><strong>Cuisine:</strong> Mexican</p>
+        <p><strong>Ingredients:</strong> Avocado, Onion, Tomato, Lime, Salt</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Hot Dog</h3>
+        <p><strong>Cuisine:</strong> American</p>
+        <p><strong>Ingredients:</strong> Sausage, Bun, Mustard, Ketchup, Onions</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>BBQ Ribs</h3>
+        <p><strong>Cuisine:</strong> American</p>
+        <p><strong>Ingredients:</strong> Pork ribs, BBQ sauce, Garlic, Brown sugar</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Gyro</h3>
+        <p><strong>Cuisine:</strong> Greek</p>
+        <p><strong>Ingredients:</strong> Pita bread, Lamb/Chicken, Tzatziki, Onion, Tomato</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Baklava</h3>
+        <p><strong>Cuisine:</strong> Greek</p>
+        <p><strong>Ingredients:</strong> Phyllo dough, Honey, Nuts, Butter</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Butter Chicken</h3>
+        <p><strong>Cuisine:</strong> Asian</p>
+        <p><strong>Ingredients:</strong> Chicken, Tomato sauce, Butter, Cream, Spices</p>
+    </div>
+
+    <div class="recipe-card">
+        <h3>Sushi</h3>
+        <p><strong>Cuisine:</strong> Asian</p>
+        <p><strong>Ingredients:</strong> Sushi rice, Nori, Fish, Avocado, Soy sauce</p>
+    </div>
+
+</div>
+    </div>   
+            <!-- No Results -->
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="fas fa-utensils"></i>
+                <h3>No recipes found</h3>
+                <p>Try adjusting your filters or add some ingredients to search</p>
+                <a href="/search" class="btn btn-primary">Search Recipes</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Food Recipe Recommendation System.</p>
+        </div>
+    </footer>
+
+    <!-- <script src="../../frontend/js/recipes.js"></script> -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/recipes.js') }}"></script>
+    <script>
+        let allRecipes = [];
+        
+        // Load recipes on page load
+        document.addEventListener('DOMContentLoaded', loadRecipes);
+        
+        async function loadRecipes() {
+            try {
+                const response = await fetch('/api/recipes');
+                const data = await response.json();
+                
+                document.getElementById('loadingState').style.display = 'none';
+                
+                if (data.recipes && data.recipes.length > 0) {
+                    allRecipes = data.recipes;
+                    displayRecipes(allRecipes);
+                } else {
+                    document.getElementById('noResults').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error loading recipes:', error);
+                document.getElementById('loadingState').innerHTML = '<p>Error loading recipes. Please try again.</p>';
+            }
+        }
+        
+        function displayRecipes(recipes) {
+            const grid = document.getElementById('recipesGrid');
+            grid.innerHTML = '';
+            
+            recipes.forEach(recipe => {
+                const card = createRecipeCard(recipe);
+                grid.innerHTML += card;
+            });
+        }
+        
+        function createRecipeCard(recipe) {
+            const categoryIcon = getCategoryIcon(recipe.category);
+            const imageUrl = recipe.image_url || 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400';
+            
+            return `
+                <div class="recipe-card">
+                    <div class="recipe-image">
+                        <img src="${imageUrl}" alt="${recipe.name}" onerror="this.src='https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400'">
+                        <span class="recipe-category ${recipe.category}">
+                            ${categoryIcon} ${recipe.category}
+                        </span>
+                    </div>
+                    <div class="recipe-content">
+                        <h3>${recipe.name}</h3>
+                        <div class="recipe-meta">
+                            <span><i class="fas fa-globe"></i> ${recipe.cuisine}</span>
+                            <span><i class="fas fa-clock"></i> ${recipe.cooking_time} min</span>
+                            <span><i class="fas fa-signal"></i> ${recipe.difficulty}</span>
+                        </div>
+                        <a href="/recipe/${recipe._id}" class="btn btn-outline btn-sm">View Recipe</a>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function getCategoryIcon(category) {
+            switch(category) {
+                case 'veg': return '<i class="fas fa-leaf"></i>';
+                case 'non-veg': return '<i class="fas fa-drumstick-bite"></i>';
+                case 'vegan': return '<i class="fas fa-seedling"></i>';
+                default: return '<i class="fas fa-utensils"></i>';
+            }
+        }
+        
+        function filterRecipes() {
+            const category = document.getElementById('categoryFilter').value;
+            const cuisine = document.getElementById('cuisineFilter').value;
+            
+            let filtered = allRecipes;
+            
+            if (category) {
+                filtered = filtered.filter(r => r.category === category);
+            }
+            
+            if (cuisine) {
+                filtered = filtered.filter(r => r.cuisine.toLowerCase() === cuisine.toLowerCase());
+            }
+            
+            if (filtered.length > 0) {
+                displayRecipes(filtered);
+                document.getElementById('noResults').style.display = 'none';
+            } else {
+                document.getElementById('recipesGrid').innerHTML = '';
+                document.getElementById('noResults').style.display = 'block';
+            }
+        }
+        
+        // Check session
+        fetch('/api/check_session')
+            .then(res => res.json())
+            .then(data => {
+                const navAuth = document.getElementById('navAuth');
+                if (data.logged_in) {
+                    navAuth.innerHTML = `
+                        <span class="welcome-text">Welcome, ${data.username}</span>
+                        <button onclick="logout()" class="btn btn-outline">Logout</button>
+                    `;
+                }
+            });
+        
+        async function logout() {
+            await fetch('/api/logout', { method: 'POST' });
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>

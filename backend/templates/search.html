@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Recipes - RecipeHub</title>
+    <!-- <link rel="stylesheet" href="../../frontend/css/style.css"> -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-utensils"></i>
+                <span>RecipeHub</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/search" class="nav-link active">Search Recipes</a></li>
+                <li><a href="/recipes" class="nav-link">All Recipes</a></li>
+            </ul>
+            <div class="nav-auth" id="navAuth">
+                <a href="/login" class="btn btn-outline">Login</a>
+                <a href="/register" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-header">
+                <h1>Find Your Perfect Recipe</h1>
+                <p>Enter the ingredients you have and discover delicious recipes</p>
+            </div>
+            
+            <div class="search-form-container">
+                <form id="searchForm">
+                    <!-- Ingredients Input -->
+                    <div class="form-group">
+                        <label for="ingredients">
+                            <i class="fas fa-carrot"></i> Ingredients
+                        </label>
+                        <div class="ingredient-input-wrapper">
+                            <input 
+                                type="text" 
+                                id="ingredientInput" 
+                                placeholder="Type an ingredient and press Enter"
+                            >
+                            <button type="button" id="addIngredientBtn" class="btn btn-secondary">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                        <div class="ingredient-tags" id="ingredientTags">
+                            <!-- Ingredients will be added here dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Category Selection -->
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-filter"></i> Category
+                        </label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="category" value="" checked>
+                                <span>All</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="category" value="veg">
+                                <span><i class="fas fa-leaf"></i> Vegetarian</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="category" value="non-veg">
+                                <span><i class="fas fa-drumstick-bite"></i> Non-Veg</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="category" value="vegan">
+                                <span><i class="fas fa-seedling"></i> Vegan</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Cuisine Selection -->
+                    <div class="form-group">
+                        <label for="cuisine">
+                            <i class="fas fa-globe"></i> Cuisine Type
+                        </label>
+                        <select id="cuisine" name="cuisine">
+                            <option value="">All Cuisines</option>
+                            <option value="Indian">Indian</option>
+                            <option value="Italian">Italian</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="Mexican">Mexican</option>
+                            <option value="American">American</option>
+                            <option value="Greek">Greek</option>
+                            <option value="Asian">Asian</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                        <i class="fas fa-search"></i> Find Recipes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section" id="resultsSection" style="display: none;">
+        <div class="container">
+            <div class="results-header">
+                <h2>Recommended Recipes</h2>
+                <p id="resultsCount"></p>
+            </div>
+            <div class="results-grid" id="resultsGrid">
+                <!-- Recipe cards will be inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Food Recipe Recommendation System.</p>
+        </div>
+    </footer>
+
+    <!-- <script src="../../frontend/js/search.js"></script> -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    <script>
+        // Check session on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            checkSession();
+            
+            // Check URL parameters for pre-filled filters
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            const cuisine = urlParams.get('cuisine');
+            
+            if (category) {
+                const radioButtons = document.querySelectorAll('input[name="category"]');
+                radioButtons.forEach(radio => {
+                    if (radio.value === category) {
+                        radio.checked = true;
+                    }
+                });
+            }
+            
+            if (cuisine) {
+                document.getElementById('cuisine').value = cuisine;
+            }
+        });
+        
+        async function checkSession() {
+            try {
+                const response = await fetch('/api/check_session');
+                const data = await response.json();
+                
+                const navAuth = document.getElementById('navAuth');
+                
+                if (data.logged_in) {
+                    navAuth.innerHTML = `
+                        <span class="welcome-text">Welcome, ${data.username}</span>
+                        <button onclick="logout()" class="btn btn-outline">Logout</button>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error checking session:', error);
+            }
+        }
+        
+        async function logout() {
+            try {
+                await fetch('/api/logout', { method: 'POST' });
+                window.location.href = '/';
+            } catch (error) {
+                console.error('Error logging out:', error);
+            }
+        }
+    </script>
+</body>
+</html>

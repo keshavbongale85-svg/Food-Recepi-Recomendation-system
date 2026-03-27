@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Details - RecipeHub</title>
+    <!-- <link rel="stylesheet" href="../../frontend/css/style.css"> -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-utensils"></i>
+                <span>RecipeHub</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/search" class="nav-link">Search Recipes</a></li>
+                <li><a href="/recipes" class="nav-link">All Recipes</a></li>
+            </ul>
+            <div class="nav-auth" id="navAuth">
+                <a href="/login" class="btn btn-outline">Login</a>
+                <a href="/register" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Recipe Detail Section -->
+    <section class="recipe-detail-section">
+        <div class="container">
+            <!-- Loading State -->
+            <div id="loadingState" class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading recipe...</p>
+            </div>
+            
+            <!-- Recipe Content -->
+            <div id="recipeContent" style="display: none;">
+                <div class="recipe-detail-header">
+                    <a href="/recipes" class="back-link">
+                        <i class="fas fa-arrow-left"></i> Back to Recipes
+                    </a>
+                </div>
+                
+                <div class="recipe-detail-grid">
+                    <!-- Recipe Image -->
+                    <div class="recipe-detail-image">
+                        <img id="recipeImage" src="" alt="Recipe Image">
+                    </div>
+                    
+                    <!-- Recipe Info -->
+                    <div class="recipe-detail-info">
+                        <h1 id="recipeName"></h1>
+                        
+                        <div class="recipe-badges">
+                            <span class="badge" id="recipeCategory"></span>
+                            <span class="badge cuisine-badge" id="recipeCuisine"></span>
+                            <span class="badge" id="recipeDifficulty"></span>
+                        </div>
+                        
+                        <div class="recipe-stats">
+                            <div class="stat">
+                                <i class="fas fa-clock"></i>
+                                <span id="recipeTime"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="recipe-actions">
+                            <button class="btn btn-primary" onclick="window.print()">
+                                <i class="fas fa-print"></i> Print Recipe
+                            </button>
+                            <button class="btn btn-outline" onclick="goBack()">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recipe-detail-content">
+                    <!-- Ingredients -->
+                    <div class="recipe-ingredients">
+                        <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
+                        <ul id="recipeIngredients">
+                            <!-- Ingredients will be inserted here -->
+                        </ul>
+                    </div>
+                    
+                    <!-- Cooking Steps -->
+                    <div class="recipe-steps">
+                        <h2><i class="fas fa-clipboard-list"></i> Cooking Steps</h2>
+                        <ol id="recipeSteps">
+                            <!-- Steps will be inserted here -->
+                        </ol>
+                    </div>
+                </div>
+                
+                <!-- Similar Recipes -->
+                <div class="similar-recipes" id="similarRecipesSection">
+                    <h2><i class="fas fa-magic"></i> Similar Recipes</h2>
+                    <div class="similar-recipes-grid" id="similarRecipesGrid">
+                        <!-- Similar recipes will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Error State -->
+            <div id="errorState" class="error-state" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h2>Recipe Not Found</h2>
+                <p>The recipe you're looking for doesn't exist or has been removed.</p>
+                <a href="/recipes" class="btn btn-primary">Browse Recipes</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Food Recipe Recommendation System.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Get recipe ID from URL
+        const recipeId = "{{ recipe_id }}";
+        
+        // Load recipe on page load
+        document.addEventListener('DOMContentLoaded', loadRecipe);
+        
+        async function loadRecipe() {
+            try {
+                const response = await fetch(`/api/recipes/${recipeId}`);
+                
+                if (!response.ok) {
+                    throw new Error('Recipe not found');
+                }
+                
+                const recipe = await response.json();
+                
+                // Display recipe details
+                displayRecipe(recipe);
+                
+                // Load similar recipes
+                loadSimilarRecipes(recipeId);
+                
+            } catch (error) {
+                console.error('Error loading recipe:', error);
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('errorState').style.display = 'block';
+            }
+        }
+        
+        function displayRecipe(recipe) {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('recipeContent').style.display = 'block';
+            
+            // Set recipe data
+            const imageUrl = recipe.image_url || 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400';
+            document.getElementById('recipeImage').src = imageUrl;
+            document.getElementById('recipeName').textContent = recipe.name;
+            
+            // Category
+            const categoryBadge = document.getElementById('recipeCategory');
+            categoryBadge.className = `badge ${recipe.category}`;
+            categoryBadge.innerHTML = getCategoryIcon(recipe.category) + ' ' + recipe.category.charAt(0).toUpperCase() + recipe.category.slice(1);
+            
+            // Cuisine
+            document.getElementById('recipeCuisine').textContent = recipe.cuisine;
+            
+            // Difficulty
+            document.getElementById('recipeDifficulty').textContent = recipe.difficulty;
+            
+            // Time
+            document.getElementById('recipeTime').textContent = `${recipe.cooking_time} minutes`;
+            
+            // Ingredients
+            const ingredientsList = document.getElementById('recipeIngredients');
+            recipe.ingredients.forEach(ingredient => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="fas fa-check-circle"></i> ${ingredient}`;
+                ingredientsList.appendChild(li);
+            });
+            
+            // Steps
+            const stepsList = document.getElementById('recipeSteps');
+            recipe.steps.forEach(step => {
+                const li = document.createElement('li');
+                li.textContent = step;
+                stepsList.appendChild(li);
+            });
+        }
+        
+        async function loadSimilarRecipes(recipeId) {
+            try {
+                const response = await fetch(`/api/recipes/${recipeId}/similar`);
+                const data = await response.json();
+                
+                if (data.recipes && data.recipes.length > 0) {
+                    displaySimilarRecipes(data.recipes);
+                } else {
+                    document.getElementById('similarRecipesSection').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error loading similar recipes:', error);
+                document.getElementById('similarRecipesSection').style.display = 'none';
+            }
+        }
+        
+        function displaySimilarRecipes(recipes) {
+            const grid = document.getElementById('similarRecipesGrid');
+            
+            recipes.forEach(recipe => {
+                const imageUrl = recipe.image_url || 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400';
+                
+                const card = `
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="${imageUrl}" alt="${recipe.name}" onerror="this.src='https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400'">
+                        </div>
+                        <div class="recipe-content">
+                            <h4>${recipe.name}</h4>
+                            <a href="/recipe/${recipe._id}" class="btn btn-outline btn-sm">View</a>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+        
+        function getCategoryIcon(category) {
+            switch(category) {
+                case 'veg': return '<i class="fas fa-leaf"></i>';
+                case 'non-veg': return '<i class="fas fa-drumstick-bite"></i>';
+                case 'vegan': return '<i class="fas fa-seedling"></i>';
+                default: return '<i class="fas fa-utensils"></i>';
+            }
+        }
+        
+        function goBack() {
+            window.history.back();
+        }
+        
+        // Check session
+        fetch('/api/check_session')
+            .then(res => res.json())
+            .then(data => {
+                const navAuth = document.getElementById('navAuth');
+                if (data.logged_in) {
+                    navAuth.innerHTML = `
+                        <span class="welcome-text">Welcome, ${data.username}</span>
+                        <button onclick="logout()" class="btn btn-outline">Logout</button>
+                    `;
+                }
+            });
+        
+        async function logout() {
+            await fetch('/api/logout', { method: 'POST' });
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>

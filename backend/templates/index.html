@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Recipe Recommendation System</title>
+    <!-- <link rel="stylesheet" href="../../frontend/css/style.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-utensils"></i>
+                <span>RecipeHub</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/search" class="nav-link">Search Recipes</a></li>
+                <li><a href="/recipes" class="nav-link">All Recipes</a></li>
+            </ul>
+            <div class="nav-auth">
+                <a href="/login" class="btn btn-outline">Login</a>
+                <a href="/register" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Discover Delicious Recipes</h1>
+            <p>Find the perfect recipe based on ingredients you have at home</p>
+            <div class="hero-buttons">
+                <a href="/search" class="btn btn-primary btn-lg">Find Recipes</a>
+                <a href="/register" class="btn btn-outline btn-lg">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-carrot"></i>
+                    </div>
+                    <h3>Enter Ingredients</h3>
+                    <p>Input the ingredients you have available at home</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3>Set Preferences</h3>
+                    <p>Choose your dietary preferences and cuisine type</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Get Recommendations</h3>
+                    <p>Receive personalized recipe recommendations instantly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Browse by Category</h2>
+            <div class="category-grid">
+                <a href="/search?category=veg" class="category-card veg">
+                    <i class="fas fa-leaf"></i>
+                    <span>Vegetarian</span>
+                </a>
+                <a href="/search?category=non-veg" class="category-card non-veg">
+                    <i class="fas fa-drumstick-bite"></i>
+                    <span>Non-Veg</span>
+                </a>
+                <a href="/search?category=vegan" class="category-card vegan">
+                    <i class="fas fa-seedling"></i>
+                    <span>Vegan</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Cuisines -->
+    <section class="cuisines">
+        <div class="container">
+            <h2 class="section-title">Popular Cuisines</h2>
+            <div class="cuisine-grid">
+                <a href="/search?cuisine=Indian" class="cuisine-card">
+                    <span>Indian</span>
+                </a>
+                <a href="/search?cuisine=Italian" class="cuisine-card">
+                    <span>Italian</span>
+                </a>
+                <a href="/search?cuisine=Chinese" class="cuisine-card">
+                    <span>Chinese</span>
+                </a>
+                <a href="/search?cuisine=Mexican" class="cuisine-card">
+                    <span>Mexican</span>
+                </a>
+                <a href="/search?cuisine=American" class="cuisine-card">
+                    <span>American</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Food Recipe Recommendation System. Built for college mini project.</p>
+        </div>
+    </footer>
+
+    <!-- <script src="../../frontend/js/main.js"></script> -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

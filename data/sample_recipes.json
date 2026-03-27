@@ -1,0 +1,203 @@
+{
+    "description": "Sample recipes data for the Food Recipe Recommendation System",
+    "recipes": [
+        {
+            "name": "Vegetable Biryani",
+            "ingredients": ["rice", "vegetables", "onion", "garlic", "ginger", "spices", "saffron", "ghee"],
+            "steps": [
+                "Soak rice for 30 minutes",
+                "Fry onions until golden brown",
+                "Add mixed vegetables and spices",
+                "Layer rice and vegetables",
+                "Cook on low heat for 20 minutes with dum",
+                "Garnish with fried onions and serve"
+            ],
+            "category": "veg",
+            "cuisine": "Indian",
+            "image_url": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400",
+            "cooking_time": 45,
+            "difficulty": "Medium"
+        },
+        {
+            "name": "Chicken Curry",
+            "ingredients": ["chicken", "onion", "tomatoes", "garlic", "ginger", "spices", "cream", "oil"],
+            "steps": [
+                "Marinate chicken with yogurt and spices for 30 minutes",
+                "Fry onions until golden",
+                "Add tomatoes and cook until soft",
+                "Add chicken pieces and cook",
+                "Add cream and simmer for 15 minutes",
+                "Garnish with fresh coriander"
+            ],
+            "category": "non-veg",
+            "cuisine": "Indian",
+            "image_url": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400",
+            "cooking_time": 40,
+            "difficulty": "Medium"
+        },
+        {
+            "name": "Vegetable Stir Fry",
+            "ingredients": ["broccoli", "carrot", "bell pepper", "soy sauce", "garlic", "ginger", "oil"],
+            "steps": [
+                "Cut vegetables into bite-sized pieces",
+                "Heat oil in a wok over high heat",
+                "Add garlic and ginger, stir for 30 seconds",
+                "Add vegetables and stir fry for 5-7 minutes",
+                "Add soy sauce and toss",
+                "Serve immediately"
+            ],
+            "category": "vegan",
+            "cuisine": "Chinese",
+            "image_url": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400",
+            "cooking_time": 20,
+            "difficulty": "Easy"
+        },
+        {
+            "name": "Grilled Salmon",
+            "ingredients": ["salmon", "lemon", "garlic", "olive oil", "dill", "salt", "pepper"],
+            "steps": [
+                "Season salmon with herbs, salt, and pepper",
+                "Drizzle with olive oil and lemon juice",
+                "Preheat grill to medium-high heat",
+                "Grill salmon for 10-12 minutes",
+                "Serve with lemon wedges"
+            ],
+            "category": "non-veg",
+            "cuisine": "American",
+            "image_url": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
+            "cooking_time": 25,
+            "difficulty": "Easy"
+        },
+        {
+            "name": "Paneer Tikka",
+            "ingredients": ["paneer", "yogurt", "spices", "bell pepper", "onion", "tomato", "cream"],
+            "steps": [
+                "Cut paneer into cubes",
+                "Marinate paneer in yogurt and spices for 2 hours",
+                "Add vegetables to marinade",
+                "Thread onto skewers",
+                "Grill or bake for 15 minutes",
+                "Serve with mint chutney"
+            ],
+            "category": "veg",
+            "cuisine": "Indian",
+            "image_url": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400",
+            "cooking_time": 35,
+            "difficulty": "Medium"
+        },
+        {
+            "name": "Pasta Carbonara",
+            "ingredients": ["pasta", "bacon", "eggs", "cheese", "garlic", "black pepper", "cream"],
+            "steps": [
+                "Cook pasta according to package directions",
+                "Fry bacon until crispy",
+                "Mix eggs with grated cheese",
+                "Drain pasta and add to bacon",
+                "Remove from heat and add egg mixture",
+                "Toss quickly and serve"
+            ],
+            "category": "non-veg",
+            "cuisine": "Italian",
+            "image_url": "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=400",
+            "cooking_time": 25,
+            "difficulty": "Easy"
+        },
+        {
+            "name": "Vegetable Pasta",
+            "ingredients": ["pasta", "tomatoes", "zucchini", "bell pepper", "garlic", "olive oil", "basil"],
+            "steps": [
+                "Cook pasta al dente",
+                "Sauté garlic in olive oil",
+                "Add vegetables and cook for 5 minutes",
+                "Add tomatoes and simmer",
+                "Toss pasta with sauce",
+                "Garnish with fresh basil"
+            ],
+            "category": "veg",
+            "cuisine": "Italian",
+            "image_url": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400",
+            "cooking_time": 25,
+            "difficulty": "Easy"
+        },
+        {
+            "name": "Tofu Stir Fry",
+            "ingredients": ["tofu", "broccoli", "soy sauce", "sesame oil", "garlic", "ginger", "rice"],
+            "steps": [
+                "Press and cube tofu",
+                "Fry tofu until golden on all sides",
+                "Add vegetables and stir fry",
+                "Add soy sauce and sesame oil",
+                "Serve over steamed rice"
+            ],
+            "category": "vegan",
+            "cuisine": "Asian",
+            "image_url": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+            "cooking_time": 25,
+            "difficulty": "Easy"
+        },
+        {
+            "name": "Butter Chicken",
+            "ingredients": ["chicken", "butter", "cream", "tomatoes", "garlic", "ginger", "spices", "kasuri methi"],
+            "steps": [
+                "Cook chicken in tomato gravy",
+                "Add butter and cream",
+                "Simmer for 10 minutes",
+                "Add kasuri methi for flavor",
+                "Serve with naan or rice"
+            ],
+            "category": "non-veg",
+            "cuisine": "Indian",
+            "image_url": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400",
+            "cooking_time": 45,
+            "difficulty": "Medium"
+        },
+        {
+            "name": "Greek Salad",
+            "ingredients": ["cucumber", "tomatoes", "olives", "feta cheese", "red onion", "olive oil", "oregano"],
+            "steps": [
+                "Chop cucumber and tomatoes",
+                "Add olives and feta cheese",
+                "Slice red onion thinly",
+                "Drizzle with olive oil",
+                "Sprinkle oregano and serve"
+            ],
+            "category": "veg",
+            "cuisine": "Greek",
+            "image_url": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400",
+            "cooking_time": 10,
+            "difficulty": "Easy"
+        },
+        {
+            "name": "Quinoa Bowl",
+            "ingredients": ["quinoa", "black beans", "corn", "avocado", "lime", "cilantro", "jalapeño"],
+            "steps": [
+                "Cook quinoa according to package",
+                "Mix black beans and corn",
+                "Assemble bowl with quinoa",
+                "Add toppings",
+                "Drizzle with lime juice"
+            ],
+            "category": "vegan",
+            "cuisine": "Mexican",
+            "image_url": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+            "cooking_time": 20,
+            "difficulty": "Easy"
+        },
+        {
+            "name": "Fish Tacos",
+            "ingredients": ["fish", "tortillas", "cabbage", "lime", "cilantro", "sour cream", "avocado"],
+            "steps": [
+                "Grill or pan-fry fish with spices",
+                "Warm tortillas",
+                "Prepare cabbage slaw",
+                "Assemble tacos with all ingredients",
+                "Top with sour cream and avocado"
+            ],
+            "category": "non-veg",
+            "cuisine": "Mexican",
+            "image_url": "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=400",
+            "cooking_time": 25,
+            "difficulty": "Easy"
+        }
+    ]
+}
